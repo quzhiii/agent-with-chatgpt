@@ -16,6 +16,6 @@
 
 - `src/ bin/ tests/`：上游桥接服务（c2c CLI + 只读 MCP + OAuth + 隧道），上游原结构。
 - `skill/`：上游原 Codex 版 SKILL.md（保留）。
-- `skills/zcode|qoder|workbuddy/`：本项目新增的三端适配层。
+- `skills/zcode|qoder|workbuddy/`：本项目新增的三端适配层（zcode 与 qoder 各有全自动 SKILL.md，qoder 另有手动中继 README，workbuddy 为手动中继 README）。
 - `install/`：安装脚本（装桥 + 装对应端 skill）。
 - `docs/`：adapter-matrix.md（三端能力矩阵 + 与上游差异清单）+ 上游原 README 存档。

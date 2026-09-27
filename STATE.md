@@ -17,13 +17,17 @@
   - 完整循环：INIT → ChatGPT 经 MCP 读 git 状态产出 PLAN → 执行（创建 docs/e2e-test-note.md）→ `c2c record` → EXECUTED → ChatGPT 独立审核（read_file 逐字节比对 + execution_output 检查 + 确认无其他文件变动）→ **STATE: DONE**，四项验收全 PASS
   - 会话已存（long-chat，记录在本机 c2c 状态目录，URL 不写入仓库）
   - 实测经验全部回写 `skills/zcode/SKILL.md`（§4 新入口、§7 发送按钮/勾选框、§9 生成判定、§10 视口调高、登录降级、恢复映射表 2 行）并登记差异清单 #9/#10
+- **Qoder 手动中继实测通过（2026-09-27，c2c_qd01）**：Qoder 按 relay README 规则执行——INIT→ChatGPT PLAN→创建 scripts/repo-stats.mjs→c2c record→EXECUTED→ChatGPT 独立复核（逐文件累加验证 7 文件 1022 行）→DONE；Qoder 全程遵守协议并主动报告 AGENTS.md 规则 6（STATE.md 更新交还主会话）
+- Qoder 工具盘点：**browser-use MCP 16 工具、DOM 级**（take_snapshot/fill/click/press_key/evaluate_script），本机走 headless Chrome（视口 0、截图不可用——协议本来就不依赖截图）→ 全自动可行
+- `skills/qoder/SKILL.md` 全自动版（日常循环全自动 + 首配人工 + 中继降级兜底），已装 `~/.qoder/skills/chatgpt-brain/`
 - 隐私清理后首次提交并推送（2026-09-27）：清理 STATE.md 中的会话链接与隧道地址、移除测试产物、git 身份用 GitHub noreply 邮箱；私有仓库 `quzhiii/agent-with-chatgpt`（origin）+ upstream 双远端就位；Qoder/WorkBuddy 适配文档同步新版 UI 流程
 
 ## 待用户完成
 
+- Qoder 全自动版首轮验证：新开 Qoder 会话说「使用 chatgpt-brain 完成 XXX」（skill 已装 `~/.qoder/skills/chatgpt-brain/`）；关注两点——headless Chrome 里 chatgpt.com 登录态是否持久、Cloudflare 是否放行；失败自动回退中继模式，回报即可
+- WorkBuddy 端实测（README 已按新版 UI 更新）
 - 可选升级：ChatGPT Project 模式（Bind Project：用户建合集 + 项目指令，见 SKILL.md 会话管理节）；固定域名隧道（Cloudflare 登录，地址不再变化）；仓库转公开：`gh repo edit quzhiii/agent-with-chatgpt --visibility public`（当前私有）
 - 日常使用：任意项目目录下对 ZCode 说「使用 chatgpt-brain 完成 XXX」即可进入规划-执行-审核循环
-- Qoder / WorkBuddy 端实测（适配文档已按 2026-09-27 新版 UI 更新，等你在这两个工具里各跑一次中继循环）
 
 ## 未开始
 
