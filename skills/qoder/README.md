@@ -19,12 +19,12 @@ Qoder 有终端（CLI / Quest Mode），但没有浏览器 DOM 自动化，所�
 2. 在 Qoder 的终端里、你的项目目录下执行：
    `node "<本仓库>/bin/c2c.js" setup -w <你的项目路径> --json`
    记下返回的 `mcpUrl`、`connectorName`、`workspaceName`。
-3. 浏览器里配置 ChatGPT 连接器（人类操作，每工作区一次）：
-   - 打开 `https://chatgpt.com/#settings/Security`，开启「开发人员模式」；
-   - 打开 `https://chatgpt.com/plugins#settings/Connectors?create-connector=true&redirectAfter=%2Fplugins`
-     创建连接器：名称 = `connectorName`，Server URL = `mcpUrl`，认证 = OAuth → Connect；
-   - 授权页会要配对码：终端跑 `node "<本仓库>/bin/c2c.js" pair --json`（在 setup 之后
-     5 分钟内），把 `pairingCode` 输进授权页，看到 Connected 即完成。
+3. 浏览器里创建 MCP 应用（人类操作，每工作区一次；2026-09-27 ChatGPT 改版后无需开发者模式）：
+   - 打开 `https://chatgpt.com/plugins`，点右上角「添加」→「创建 MCP 应用」；
+   - 名称 = `connectorName`，连接选「服务器 URL」= `mcpUrl`（不选「隧道」），
+     身份验证 = OAuth，勾选风险确认框 → 「创建」→ 确认弹窗点「继续连接到 …」；
+   - 跳到授权页后要配对码：终端跑 `node "<本仓库>/bin/c2c.js" pair --json`（5 分钟内有效），
+     把 `pairingCode` 输进 `XXXX-XXXX` 输入框，点 Connect，跳回 chatgpt.com 即完成。
 4. 在 ChatGPT 里开一条新会话，发送下方 **Boot Prompt**，再发一句：
    `Use the "<connectorName>" connector: call workspace_info and read a top-level file. Reply with the workspace name.`
    回复里出现你的工作区名即配置成功。把这条会话 URL 存下来（可选：

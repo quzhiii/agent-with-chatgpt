@@ -17,12 +17,13 @@
   - 完整循环：INIT → ChatGPT 经 MCP 读 git 状态产出 PLAN → 执行（创建 docs/e2e-test-note.md）→ `c2c record` → EXECUTED → ChatGPT 独立审核（read_file 逐字节比对 + execution_output 检查 + 确认无其他文件变动）→ **STATE: DONE**，四项验收全 PASS
   - 会话已存（long-chat，记录在本机 c2c 状态目录，URL 不写入仓库）
   - 实测经验全部回写 `skills/zcode/SKILL.md`（§4 新入口、§7 发送按钮/勾选框、§9 生成判定、§10 视口调高、登录降级、恢复映射表 2 行）并登记差异清单 #9/#10
+- 隐私清理后首次提交并推送（2026-09-27）：清理 STATE.md 中的会话链接与隧道地址、移除测试产物、git 身份用 GitHub noreply 邮箱；私有仓库 `quzhiii/agent-with-chatgpt`（origin）+ upstream 双远端就位；Qoder/WorkBuddy 适配文档同步新版 UI 流程
 
 ## 待用户完成
 
-- 本仓库 git commit（按工作区规则不主动提交；含新增适配层 + 8 处品牌化改动 + 本次实测回写）；后续可加 origin 远端发布
-- 可选升级：ChatGPT Project 模式（Bind Project：用户建合集 + 项目指令，见 SKILL.md 会话管理节）；固定域名隧道（Cloudflare 登录，地址不再变化）
+- 可选升级：ChatGPT Project 模式（Bind Project：用户建合集 + 项目指令，见 SKILL.md 会话管理节）；固定域名隧道（Cloudflare 登录，地址不再变化）；仓库转公开：`gh repo edit quzhiii/agent-with-chatgpt --visibility public`（当前私有）
 - 日常使用：任意项目目录下对 ZCode 说「使用 chatgpt-brain 完成 XXX」即可进入规划-执行-审核循环
+- Qoder / WorkBuddy 端实测（适配文档已按 2026-09-27 新版 UI 更新，等你在这两个工具里各跑一次中继循环）
 
 ## 未开始
 

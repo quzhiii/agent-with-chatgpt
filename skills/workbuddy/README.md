@@ -19,8 +19,9 @@ Qoder 适配层。
 
 ## 一次性配置
 
-与 Qoder 版完全一致：装桥 → `c2c setup -w <工作区>` → 浏览器建连接器（OAuth + 配对码）
-→ Boot Prompt + workspace_info 验证 → 存会话/建 Project。步骤照
+与 Qoder 版完全一致：装桥 → `c2c setup -w <工作区>` → 浏览器建 MCP 应用
+（`chatgpt.com/plugins` →「添加」→「创建 MCP 应用」→ OAuth + 配对码，2026-09-27 改版后
+无需开发者模式）→ Boot Prompt + workspace_info 验证 → 存会话/建 Project。步骤照
 `../qoder/README.md` 的「一次性配置」执行即可。工作区选你放交付物的文件夹
 （WorkBuddy 的产出目录），它同样会被 MCP 只读暴露给 ChatGPT。
 
