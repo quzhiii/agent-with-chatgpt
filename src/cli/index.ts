@@ -34,6 +34,7 @@ import {
   CHATGPT_PLUGINS_URL,
   connectorAction,
   connectorNameFor,
+  DEFAULT_CONNECTOR_NAME,
   mcpUrlFromPublic,
   normalizePublicUrl,
   readLastEndpoint,
@@ -213,7 +214,7 @@ async function ensureBridgeAndTunnel(
 
 program
   .name("c2c")
-  .description(`${PRODUCT_NAME} — ChatGPT thinks. Codex works.`)
+  .description(`${PRODUCT_NAME} — ChatGPT thinks. Your local agent works.`)
   .version(VERSION, "-v, --version")
   .configureHelp({ sortSubcommands: true });
 
@@ -341,7 +342,7 @@ program
       say(`配对码：${pairingResult.code}（${Math.round((pairingResult.expiresAt - Date.now()) / 60000)} 分钟内有效）`);
       say("");
       say("下一步：在 ChatGPT 的连接器设置中添加以上地址（OAuth），并在授权页输入配对码。");
-      say("如果你在使用 Codex Skill，这一步会自动完成。");
+      say("如果你在使用配套的 Skill（ZCode / Codex），这一步会自动完成。");
     } catch (error) {
       handleCliError(error, opts.json);
     }
@@ -510,7 +511,7 @@ program
           previousName: lastEndpoint?.connectorName,
           hadEndpointBefore: Boolean(lastEndpoint),
         })
-      : "Codex with ChatGPT";
+      : DEFAULT_CONNECTOR_NAME;
     const tunnelState = workspace ? readTunnelState(workspace.id) : null;
     const namedReady = tunnelState ? isNamedTunnelReady(tunnelState) : false;
     let namedRepair: { needed: boolean; userMessage?: string } = { needed: false };
@@ -1056,7 +1057,7 @@ acceptUnusedWorkspaceOption(
 
 program
   .command("record", { hidden: true })
-  .description("Record a Codex execution summary (used by the Skill)")
+  .description("Record an execution summary (used by the Skill)")
   .option("-w, --workspace <path>")
   .requiredOption("--task <id>")
   .requiredOption("--iteration <n>", "non-negative execution iteration", parseNonNegativeInteger)
