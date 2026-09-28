@@ -85,7 +85,12 @@ C2C 桥给 ChatGPT 提供对当前工作区的只读 MCP 访问，所以你和 C
 `PLAN_RECEIVED`、`EXECUTING`、`EXECUTED_LOCAL`、`EXECUTED_SENT`、`DONE`、`BLOCKED`。
 没有 `STATE: RESUME`，会话丢了就发 HANDOFF。
 
-0. `c2c doctor -w <workspace> --json`（自动修复）。门禁不绿按黄金规则 8 处理。
+0. **权限前置检查（先于一切）。** 本 skill 需要反复执行桥命令（`node "<checkout>/bin/c2c.js" ...`）。
+   若会话处于自动权限模式，分类器可能把 c2c 命令判定为「与任务无关」直接拦截（不弹窗）。
+   第一次被拦时：不要重试超过一次；立即停下告知用户——「自动模式的分类器拦了桥命令，
+   请把会话权限模式切到“每条命令询问”（或信任模式），切完回复“好了”」，等用户切换后再继续。
+   用户明确不愿切模式时，改走「中继降级」并如实说明（中继仍需用户在终端代跑 c2c record）。
+   然后跑 `c2c doctor -w <workspace> --json`（自动修复）。门禁不绿按黄金规则 8 处理。
    任务号：`c2c_` + 4 位随机十六进制；已有检查点则复用，不许另铸。
 1. `c2c session -w <workspace> --json` 取 `conversation.chatUrl`。`browser-use` 打开该
    URL，`take_snapshot` 确认会话加载（看得到历史消息与输入框）。**先查检查点恢复**
