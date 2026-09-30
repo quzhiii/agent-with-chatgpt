@@ -2,6 +2,8 @@
 
 ChatGPT thinks. Your local agent works.
 
+简体中文 · [English](README.en.md)
+
 本项目把网页版 ChatGPT（你已付费的 Plus/Pro 订阅）接入本地 AI 编程/办公 Agent：
 ChatGPT 负责理解、规划、**独立审核**；本地 Agent 负责执行。规划与审核所需的一切
 代码、diff、文件，ChatGPT 通过官方「连接器」功能从你本地只读拉取——仓库不上传、
@@ -41,7 +43,7 @@ fork 自 [XiaoDuoYa/codex-with-chatgpt](https://github.com/XiaoDuoYa/codex-with-
 前置：Node.js ≥ 20、Git；ChatGPT Plus/Pro 订阅。
 
 ```bash
-git clone <本仓库> && cd <本仓库>
+git clone https://github.com/quzhiii/agent-with-chatgpt.git && cd agent-with-chatgpt
 powershell -ExecutionPolicy Bypass -File install\install-zcode.ps1   # Windows
 bash install/install-zcode.sh                                        # macOS / Linux
 ```
@@ -67,12 +69,25 @@ Qoder / WorkBuddy 的接入与日常循环见各自适配文档（需要你在�
   （私钥整体拒绝、token 打码、截断）；token 只存 SHA-256 哈希。
 - 凭证全部存在系统应用状态目录，绝不进项目目录。详见 [docs/security.md](docs/security.md)。
 
-## 与上游的关系
+## 致谢与来源
 
-- `src/`（桥接服务）与上游保持最小差异（产品名等展示字符串），完整差异清单见
-  [docs/adapter-matrix.md](docs/adapter-matrix.md)；`upstream` remote 可同步上游更新。
-- 上游原 README：[docs/upstream-readme/](docs/upstream-readme/)。
-- 非官方社区项目，与 OpenAI 无隶属或背书。ChatGPT 连接器是官方功能；请遵守相应服务条款。
+本项目 fork 自 [XiaoDuoYa/codex-with-chatgpt](https://github.com/XiaoDuoYa/codex-with-chatgpt)
+（MIT，5.2k+ stars），在此感谢上游作者与全部贡献者。
+
+- **来自上游的**：`src/` 本地桥接服务（C2C CLI、只读 MCP、OAuth、隧道）——与上游保持
+  最小差异（产品名等展示字符串），完整差异清单见 [docs/adapter-matrix.md](docs/adapter-matrix.md)；
+  `upstream` remote 可持续同步上游更新。
+- **本项目新增的**：ZCode / Qoder / WorkBuddy 三端适配层（[skills/](skills/)）、
+  SkillHub 发布版 skill（[skills/skillhub](skills/skillhub/SKILL.md)）、安装脚本与多端文档。
+- 上游原 README 存档：[docs/upstream-readme/](docs/upstream-readme/)。
+
+## 许可证
+
+[MIT](LICENSE)。与上游一致，本项目保持开源、免费使用。
+`src/` 桥接服务版权归 codex-with-chatgpt 上游作者及贡献者所有；三端适配层与
+SkillHub 发布版归本项目贡献者所有。
+
+> 非官方社区项目，与 OpenAI 无隶属或背书。ChatGPT 连接器是官方功能；请遵守相应服务条款。
 
 ## 边界
 

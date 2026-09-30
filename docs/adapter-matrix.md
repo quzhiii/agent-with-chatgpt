@@ -1,6 +1,6 @@
 # 适配矩阵 与 与上游的差异清单
 
-更新时间 2026-09-27（端到端实测通过后），基于上游 v0.1.3（commit 9663b88）。
+更新时间 2026-09-29（发布准备：差异清单新增 #11/#12），基于上游 v0.1.3（commit 9663b88）。
 
 ## 一、三端适配矩阵
 
@@ -32,6 +32,8 @@
 | 8 | 新增 `skills/`、`install/`、`docs/adapter-matrix.md`、治理文件 | 本项目主体增量 | — | 无（纯新增） |
 | 9 | `skills/zcode/SKILL.md` 相对上游 `skill/SKILL.md` 的有意分歧（2026-09-27 端到端实测后定稿） | ChatGPT 线上 UI 改版适配：①旧直达 URL `plugins#settings/Connectors?create-connector=true` 失效（重定向到设置页），创建改走插件页「添加 → 创建 MCP 应用」按钮流程；②设置页开发者模式开关已移除，创建无需开发者模式，只勾风险确认框；③聊天输入框 Enter 只换行，必须点「发送」按钮；④「新建插件」弹窗超 720px 视口，需 `setViewportSize` 调高；⑤内置浏览器 Google OAuth 被 Google 风控拦截，登录走邮箱验证码路线；⑥browser-use 新内核 bootstrap/标签页恢复协议替换 Codex iab 规则 | 适配层职责（不动 `src/`，上游 `skill/SKILL.md` 保留供 Codex） | 无（纯适配层） |
 | 10 | `install/install-zcode.ps1` cloudflared 兜底 | winget 安装会触发 UAC（无人值守时被拒，退出码 1602）；脚本改为优先从官方 GitHub release 下载单文件到 `~/bin` 并写 `C2C_CLOUDFLARED_PATH` 用户环境变量（c2c detect.ts 读该变量） | 免提权安装 | 无（纯新增） |
+| 11 | `package.json` | 新增 `repository` 字段（指向本仓库）；`description` 更新为多端定位 | 开源发布：npm 元数据需仓库指针与准确描述；`name`/`version`/`bin` 保持上游不动 | 低（元数据行） |
+| 12 | `README.md` 双语化、新增 `README.en.md`、新增 `skills/skillhub/` 与 `docs/publish/` | README 增加语言切换行、「致谢与来源」「许可证」章节、真实 clone 地址；skillhub 版为平台中立 chatgpt-brain skill（SKILL.md 兼作小红书 SkillHub 详情页）；publish 目录存发布文案草稿 | 小红书 SkillHub 发布 + 来源标注强化 | 无（纯新增/文档） |
 
 **不改的**（保持上游可合并 + 行为兼容）：CLI 命令名 `c2c`、协议标记 `[C2C]`、状态目录
 `codex-with-chatgpt`、`skill/SKILL.md`（原 Codex 版）、协议文档 `docs/protocol.md`、

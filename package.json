@@ -1,7 +1,11 @@
 {
   "name": "codex-with-chatgpt",
   "version": "0.1.3",
-  "description": "ChatGPT thinks. Codex works. Use ChatGPT as the planning brain while keeping the Codex harness.",
+  "description": "ChatGPT Brain — use the ChatGPT web app as the planning & review brain for local coding/office agents (ZCode / Qoder / WorkBuddy / Codex). ChatGPT thinks; your local agent works.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quzhiii/agent-with-chatgpt.git"
+  },
   "type": "module",
   "license": "MIT",
   "bin": {

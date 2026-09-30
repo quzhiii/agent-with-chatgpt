@@ -1,6 +1,7 @@
 # STATE — agent-with-chatgpt 当前状态
 
-更新时间 2026-09-27（**端到端实测通过**，一期全部完成）
+更新时间 2026-09-29（一期实测通过后进入发布准备：README 双语、来源标注、SkillHub 发布素材）
+上次更新 2026-09-27（**端到端实测通过**，一期全部完成）
 
 ## 已完成
 
@@ -20,10 +21,14 @@
 - **Qoder 手动中继实测通过（2026-09-27，c2c_qd01）**：Qoder 按 relay README 规则执行——INIT→ChatGPT PLAN→创建 scripts/repo-stats.mjs→c2c record→EXECUTED→ChatGPT 独立复核（逐文件累加验证 7 文件 1022 行）→DONE；Qoder 全程遵守协议并主动报告 AGENTS.md 规则 6（STATE.md 更新交还主会话）
 - Qoder 工具盘点：**browser-use MCP 16 工具、DOM 级**（take_snapshot/fill/click/press_key/evaluate_script），本机走 headless Chrome（视口 0、截图不可用——协议本来就不依赖截图）→ 全自动可行
 - `skills/qoder/SKILL.md` 全自动版（日常循环全自动 + 首配人工 + 中继降级兜底），已装 `~/.qoder/skills/chatgpt-brain/`
+- Qoder 全自动首轮实测发现**权限墙**（2026-09-28）：自动权限模式的分类器把 c2c 桥命令判为「与任务无关」静默拦截（放行选项不生效、不弹窗）；协议执行本身全对（门禁、目录确认、降级建议都对）。修复：skill 增加「权限前置检查」（被拦一次即停、请用户切到每条命令询问/信任模式，不愿切则走中继）；已提交推送并重装。待用户切模式后继续该轮验证（TASK_ID c2c_qd02 --no-upstream 任务）
 - 隐私清理后首次提交并推送（2026-09-27）：清理 STATE.md 中的会话链接与隧道地址、移除测试产物、git 身份用 GitHub noreply 邮箱；私有仓库 `quzhiii/agent-with-chatgpt`（origin）+ upstream 双远端就位；Qoder/WorkBuddy 适配文档同步新版 UI 流程
+- **发布准备（2026-09-29，产物待用户过目）**：README 双语化（中文主 + `README.en.md`，顶部语言切换、新增「致谢与来源」「许可证」章节、真实 clone 地址）；`package.json` 加 `repository`、description 多端化（差异清单 #11/#12）；新增 `skills/skillhub/`（平台中立 chatgpt-brain skill，SKILL.md 兼作小红书 SkillHub 详情页）；小红书笔记文案与上架素材草稿存 `docs/publish/`；官方 redskillhub-upload skill ZIP 已下载并审查（临时目录，未执行其中脚本）——打包规则确认：zip 打包由 CLI 负责、SKILL.md 全文即上架详情页、发布固定问 原创/转载 + 中文标签（实时拉取）、确认卡后需用户明确回复「提交」才 submit
 
 ## 待用户完成
 
+- 过目发布准备产物：README 双语、`skills/skillhub/SKILL.md`、`docs/publish/` 两份文案（笔记标题三选一、原创/转载决策）；确认后 commit + push
+- 小红书发布链路（Phase 3，等过目后执行）：隐私复查 → 用户确认后转公开（`gh repo edit quzhiii/agent-with-chatgpt --visibility public`）→ ensure-cli 版本门禁（Windows 用户级 npm prefix，进程级环境变量）→ 二维码登录（图片直发用户）→ 确认卡核对 → **仅用户明确回复「提交/确认/submit」才最终提交**；笔记由用户手动发布
 - Qoder 全自动版首轮验证：新开 Qoder 会话说「使用 chatgpt-brain 完成 XXX」（skill 已装 `~/.qoder/skills/chatgpt-brain/`）；关注两点——headless Chrome 里 chatgpt.com 登录态是否持久、Cloudflare 是否放行；失败自动回退中继模式，回报即可
 - WorkBuddy 端实测（README 已按新版 UI 更新）
 - 可选升级：ChatGPT Project 模式（Bind Project：用户建合集 + 项目指令，见 SKILL.md 会话管理节）；固定域名隧道（Cloudflare 登录，地址不再变化）；仓库转公开：`gh repo edit quzhiii/agent-with-chatgpt --visibility public`（当前私有）
