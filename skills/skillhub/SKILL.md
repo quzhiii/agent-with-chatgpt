@@ -1,10 +1,7 @@
 ---
 name: chatgpt-brain
-description: >
-  把网页版 ChatGPT（Plus/Pro 订阅）接入本地 AI 编程/办公 Agent 当「规划与审核大脑」：
-  ChatGPT 负责理解、规划、独立审核，本地 Agent 保留完整执行权。仓库不上传、
-  不需要 OpenAI API Key、不消耗 API 额度。当用户想用 ChatGPT 规划或审核任务、
-  把 ChatGPT 接入当前工作区，或提到 ChatGPT Brain / C2C 时使用。
+version: 1.0.0
+description: 把网页版 ChatGPT（Plus/Pro 订阅）接入本地 AI 编程/办公 Agent 当「规划与审核大脑」：ChatGPT 负责理解、规划、独立审核，本地 Agent 保留完整执行权；仓库不上传、无需 API Key、不消耗 API 额度。当用户想用 ChatGPT 规划或审核任务、把 ChatGPT 接入当前工作区，或提到 ChatGPT Brain / C2C 时使用。
 ---
 
 # ChatGPT Brain

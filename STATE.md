@@ -1,6 +1,6 @@
 # STATE — agent-with-chatgpt 当前状态
 
-更新时间 2026-09-29（一期实测通过后进入发布准备：README 双语、来源标注、SkillHub 发布素材）
+更新时间 2026-09-29（**SkillHub 首发已提交，仓库已转公开**）
 上次更新 2026-09-27（**端到端实测通过**，一期全部完成）
 
 ## 已完成
@@ -25,10 +25,13 @@
 - 隐私清理后首次提交并推送（2026-09-27）：清理 STATE.md 中的会话链接与隧道地址、移除测试产物、git 身份用 GitHub noreply 邮箱；私有仓库 `quzhiii/agent-with-chatgpt`（origin）+ upstream 双远端就位；Qoder/WorkBuddy 适配文档同步新版 UI 流程
 - **发布准备（2026-09-29，产物待用户过目）**：README 双语化（中文主 + `README.en.md`，顶部语言切换、新增「致谢与来源」「许可证」章节、真实 clone 地址）；`package.json` 加 `repository`、description 多端化（差异清单 #11/#12）；新增 `skills/skillhub/`（平台中立 chatgpt-brain skill，SKILL.md 兼作小红书 SkillHub 详情页）；小红书笔记文案与上架素材草稿存 `docs/publish/`；官方 redskillhub-upload skill ZIP 已下载并审查（临时目录，未执行其中脚本）——打包规则确认：zip 打包由 CLI 负责、SKILL.md 全文即上架详情页、发布固定问 原创/转载 + 中文标签（实时拉取）、确认卡后需用户明确回复「提交」才 submit
 
+- **小红书 SkillHub 首发提交成功（2026-09-29）**：chatgpt-brain v1.0.0，原创，标签 编程开发+效率工具；平台回执 skill_id=100055、version_id=105995（first_version=true）、审核单 100055_105995_1790763826754，待平台审核。发布走官方 redskillhub-upload CLI 1.0.3（用户级 npm prefix，进程级环境变量，未全局污染）；上传包 `skills/skillhub/`（SKILL.md 即详情页）。经验：CLI 不解析 YAML 折叠块（frontmatter description 需单行，已修）；Git Bash 下 `tail -f` 不转发追加数据，CLI 交互用「轮询 cat 管道」stdin 方案（临时目录脚本，不入仓库）
+- **仓库转公开（2026-09-29）**：隐私复查干净（命中均为上游测试夹具）后经 GitHub API 转公开，匿名 404→200 验证通过；发布准备改动（README 双语、致谢与来源/许可证章节、package.json 元数据、skills/skillhub/、docs/publish/ 文案）已推送（b2d44e6）
+
 ## 待用户完成
 
-- 过目发布准备产物：README 双语、`skills/skillhub/SKILL.md`、`docs/publish/` 两份文案（笔记标题三选一、原创/转载决策）；确认后 commit + push
-- 小红书发布链路（Phase 3，等过目后执行）：隐私复查 → 用户确认后转公开（`gh repo edit quzhiii/agent-with-chatgpt --visibility public`）→ ensure-cli 版本门禁（Windows 用户级 npm prefix，进程级环境变量）→ 二维码登录（图片直发用户）→ 确认卡核对 → **仅用户明确回复「提交/确认/submit」才最终提交**；笔记由用户手动发布
+- 等 SkillHub 审核结果（skill_id 100055，审核单 100055_105995_1790763826754）；过审后在小红书 App 检查 skill 页展示
+- 小红书笔记手动发布（文案 `docs/publish/xiaohongshu-note.md`，标题三选一）；粉丝/数据在 App「我」→ 创作中心看
 - Qoder 全自动版首轮验证：新开 Qoder 会话说「使用 chatgpt-brain 完成 XXX」（skill 已装 `~/.qoder/skills/chatgpt-brain/`）；关注两点——headless Chrome 里 chatgpt.com 登录态是否持久、Cloudflare 是否放行；失败自动回退中继模式，回报即可
 - WorkBuddy 端实测（README 已按新版 UI 更新）
 - 可选升级：ChatGPT Project 模式（Bind Project：用户建合集 + 项目指令，见 SKILL.md 会话管理节）；固定域名隧道（Cloudflare 登录，地址不再变化）；仓库转公开：`gh repo edit quzhiii/agent-with-chatgpt --visibility public`（当前私有）
